@@ -1,0 +1,9 @@
+version: '1.0'
+services:
+  file-organiser: 
+    volumes:
+      - /Users/prashantsihag/Downloads:/Users/prashantsihag/Downloads
+    build:
+      context: ./file-organiser/
+      dockerfile: Dockerfile
+    container_name: file-organiser

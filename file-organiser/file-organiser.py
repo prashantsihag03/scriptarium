@@ -11,9 +11,9 @@ class FileHandler(FileSystemEventHandler):
         if event.is_directory:
             return
         print(f"New file created: {event.src_path}")
-        organize_files(self.directory_path)
+        organize_files(self.directory_path, True)
 
-def organize_files(directory_path):
+def organize_files(directory_path, log: bool = False):
     # Create a dictionary to store file extensions and their corresponding folders
     extensions_folders = {}
 
@@ -40,12 +40,15 @@ def organize_files(directory_path):
         old_path = os.path.join(directory_path, filename)
         new_path = os.path.join(extensions_folders[extension], filename)
         shutil.move(old_path, new_path)
-        print(f"Moved: {filename} to {extensions_folders[extension]}")
+        if log is True:
+            print(f"Moved: {filename} to {extensions_folders[extension]}")
 
 if __name__ == "__main__":
     your_directory_path = "/Users/prashantsihag/Downloads"
 
     if os.path.exists(your_directory_path):
+        print(f"Organising existing files in directory: {your_directory_path}")
+        organize_files(your_directory_path)
         event_handler = FileHandler(your_directory_path)
         observer = Observer()
         observer.schedule(event_handler, path=your_directory_path, recursive=False)

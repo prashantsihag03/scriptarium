@@ -10,7 +10,9 @@ PLIST_TRANSIENT_FILE="${DIR_PATH}/transient-auto-wallpaper.plist"
 
 PYTHON_PATH=$(which python3)
 PY_SCRIPT_PATH="$DIR_PATH/auto-wallpaper.py"
-PY_SCRIPT_ARG="/Users/prashantsihag/Desktop/wallpaper" # path of directory that holds all wallpapers
+WALLPAPER_DIR_PATH="/Users/prashantsihag/Desktop/wallpaper" # path of directory that holds all wallpapers
+LOG_FILE_PATH="/Users/prashantsihag/Downloads/projects/scriptarium/auto-wallpaper/auto-wallpaper.log" # path of directory that holds all wallpapers
+
 
 echo "Attempting to unload previous plist file from launchctl ..."
 launchctl unload ~/Library/LaunchAgents/$FINAL_PLIST_FILENAME
@@ -18,7 +20,9 @@ launchctl unload ~/Library/LaunchAgents/$FINAL_PLIST_FILENAME
 echo "Updating path values in new plist file ..."
 sed "s|PYTHON_PATH|${PYTHON_PATH}|g" "$PLIST_FILE_TEMPLATE" > "$PLIST_FILE"
 sed "s|PY_SCRIPT_PATH|$PY_SCRIPT_PATH|g" "$PLIST_FILE" > "$PLIST_TRANSIENT_FILE"
-sed "s|PY_SCRIPT_ARG|$PY_SCRIPT_ARG|g" "$PLIST_TRANSIENT_FILE" > "$PLIST_FILE"
+sed "s|WALLPAPER_DIR_PATH|$WALLPAPER_DIR_PATH|g" "$PLIST_TRANSIENT_FILE" > "$PLIST_FILE"
+sed "s|LOG_FILE_PATH|$LOG_FILE_PATH|g" "$PLIST_FILE" > "$PLIST_TRANSIENT_FILE"
+cp -f $PLIST_TRANSIENT_FILE $PLIST_FILE
 
 rm $PLIST_TRANSIENT_FILE
 

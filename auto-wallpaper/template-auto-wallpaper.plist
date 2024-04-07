@@ -8,7 +8,9 @@
     <array>
         <string>PYTHON_PATH</string>
         <string>PY_SCRIPT_PATH</string>
-        <string>PY_SCRIPT_ARG</string>
+        <string>WALLPAPER_DIR_PATH</string>
+        <string>LOG_FILE_PATH</string>
+        <string>--verbose</string>
     </array>
     <key>KeepAlive</key>
     <true/>

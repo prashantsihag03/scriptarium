@@ -15,9 +15,17 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger(__name__)
 
 def randomly_change_wallpaper(directory: str, img_list: list[str]):
-    update_img_path = f'{directory}/{random.choice(img_list)}'
-    logger.info(f"Attempting to update wallpaper to {update_img_path}")
+    img_name = random.choice(img_list)
+    update_img_path = f'{directory}/{img_name}'
     app('Finder').desktop_picture.set(mactypes.File(update_img_path))
+    desktop_picture = app('Finder').desktop_picture.get()
+    try:
+        if desktop_picture.name.get() == img_name:
+            logger.info(f"Successfully updated wallpaper to {img_name}")
+        else :
+            logger.error(f"Failed to update wallpaper to {img_name}")
+    except Exception as ex:
+        logger.error(f"Exception encountered while validating wallpaper update attempt: {str(ex)}")
 
 def schedule_wallpaper_update(directory_path: str, all_imgs: list[str]):
     schedule.every().day.at("08:00").do(randomly_change_wallpaper, directory_path, all_imgs)

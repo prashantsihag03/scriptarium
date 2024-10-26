@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "file-organiser"
+version = "0.1.0"
+description = ""
+authors = ["Prashant Sihag <prashantsihag0309@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+watchdog = "4.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

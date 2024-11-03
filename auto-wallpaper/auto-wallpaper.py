@@ -5,6 +5,7 @@ import os
 import schedule
 import logging
 import random
+import time
 from appscript import app, mactypes
 
 # Configure logging
@@ -67,6 +68,7 @@ def main(args):
 
     while True:
         schedule.run_pending()
+        time.sleep(60)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
